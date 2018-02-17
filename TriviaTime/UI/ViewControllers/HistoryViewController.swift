@@ -13,6 +13,8 @@ import RealmSwift
 /// Displays a history of all answered trivia questions from Realm
 class HistoryViewController: UIViewController {
     
+    let realm = try! Realm()
+    
     @IBOutlet weak var tableView: UITableView!
     let dataSource = TableDatasource(items: [])
     
@@ -34,16 +36,36 @@ class HistoryViewController: UIViewController {
             NSAttributedStringKey.foregroundColor: UIColor.white
         ]
         
+//        tableView.dataSource = dataSource
+        
+        //TODO: Fill me in with history details
+        let questions = realm.objects(Question.self)
+        let arrayQuestions = Array(questions)
+        
+        
+        dataSource.items = arrayQuestions
+        
         tableView.dataSource = dataSource
         
-        dataSource.configureCell = { (tableView, indexPath) -> UITableViewCell in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell")!
         
-            //TODO: Fill me in with history details
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+        dataSource.configureCell = { (tableView, indexPath) -> UITableViewCell in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell")! 
+            cell.textLabel?.text = arrayQuestions[indexPath.row].query
+            if arrayQuestions[indexPath.row].correct == false {
+                cell.detailTextLabel?.text = "Wrong!"
+            } else {
+                cell.detailTextLabel?.text = "Right!"
+            }
             
             return cell
         }
         
         tableView.estimatedRowHeight = 55
     }
+    
+    
 }

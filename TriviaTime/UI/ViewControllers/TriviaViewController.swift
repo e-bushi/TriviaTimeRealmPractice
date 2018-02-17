@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TriviaViewController: UIViewController {
     @IBOutlet weak var question: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    
     var triviaController: TriviaController?
     var dataSource = TableDatasource(items: [String]())
+    
+    let realm_one = try! Realm()
+    
+    var questionToSave: String?
+    var questionResult: Bool?
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -46,10 +53,23 @@ class TriviaViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.question.text = triviaController.question()
+            self.questionToSave = triviaController.question()
+            
             self.dataSource.items = triviaController.choices()
             self.tableView.reloadData()
         }
     }
+    
+    func saveQueryToRealm(query: String, result: Bool, realm: Realm) {
+        let question = Question()
+        question.query = query
+        question.correct = result
+        
+        try! realm.write({
+            realm.add(question)
+        })
+    }
+    
     
     
     /// Resets the game with new trivia
@@ -60,6 +80,7 @@ class TriviaViewController: UIViewController {
 }
 
 extension TriviaViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let triviaController = triviaController else {
@@ -69,8 +90,13 @@ extension TriviaViewController: UITableViewDelegate {
         let choices = triviaController.choices()
         let choice = choices[indexPath.row]
         
+        
         let result = triviaController
             .validateChoice(choice: choice)
+        questionResult = result.resolve().result
+        
+    
+        
         
         let alertController = UIAlertController(
             title: "Result",
@@ -81,6 +107,7 @@ extension TriviaViewController: UITableViewDelegate {
         let ok = UIAlertAction(title: "Ok", style: .default, handler: { action in
             self.dismiss(animated: true, completion: nil)
             self.resetGame()
+            self.saveQueryToRealm(query: self.questionToSave!, result: self.questionResult!, realm: self.realm_one)
         })
         
         alertController.addAction(ok)
@@ -89,4 +116,6 @@ extension TriviaViewController: UITableViewDelegate {
             
         }
     }
+    
+    
 }

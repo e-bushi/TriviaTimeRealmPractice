@@ -23,6 +23,7 @@
 		05DEC3491FCEDE3A001EC6CC /* JSONTrivia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DEC3481FCEDE3A001EC6CC /* JSONTrivia.swift */; };
 		05DEC34B1FCEDF3A001EC6CC /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DEC34A1FCEDF3A001EC6CC /* APIClient.swift */; };
 		05DEC34D1FCEE9F0001EC6CC /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DEC34C1FCEE9F0001EC6CC /* HistoryViewController.swift */; };
+		F6350C9420379D6D00384E4F /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6350C9320379D6D00384E4F /* Question.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +59,7 @@
 		05DEC3481FCEDE3A001EC6CC /* JSONTrivia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTrivia.swift; sourceTree = "<group>"; };
 		05DEC34A1FCEDF3A001EC6CC /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		05DEC34C1FCEE9F0001EC6CC /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		F6350C9320379D6D00384E4F /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,8 +126,8 @@
 			children = (
 				05BAC2BD1FD1305A00CB9C22 /* Extensions */,
 				0522FC3F1FCF4BDA007FF5D2 /* UI */,
-				05DEC34E1FCEEACE001EC6CC /* Persistence */,
 				05DEC3451FCEDE20001EC6CC /* Networking */,
+				F6350C9120379D3800384E4F /* Persistence */,
 				05DEC32B1FCEDCEA001EC6CC /* AppDelegate.swift */,
 				05DEC32F1FCEDCEB001EC6CC /* Main.storyboard */,
 				05DEC3321FCEDCEB001EC6CC /* Assets.xcassets */,
@@ -161,17 +163,18 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		05DEC34E1FCEEACE001EC6CC /* Persistence */ = {
+		F6350C9120379D3800384E4F /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				05DEC3511FCEEB49001EC6CC /* Models */,
+				F6350C9220379D4300384E4F /* Models */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		05DEC3511FCEEB49001EC6CC /* Models */ = {
+		F6350C9220379D4300384E4F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F6350C9320379D6D00384E4F /* Question.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				05DEC3491FCEDE3A001EC6CC /* JSONTrivia.swift in Sources */,
 				05DEC32C1FCEDCEA001EC6CC /* AppDelegate.swift in Sources */,
 				05DEC34D1FCEE9F0001EC6CC /* HistoryViewController.swift in Sources */,
+				F6350C9420379D6D00384E4F /* Question.swift in Sources */,
 				05BAC2C11FD1316400CB9C22 /* UIWindow+Extensions.swift in Sources */,
 				0522FC3B1FCEEDD3007FF5D2 /* TriviaController.swift in Sources */,
 				05BAC2BF1FD1306600CB9C22 /* UIColor+Extensions.swift in Sources */,

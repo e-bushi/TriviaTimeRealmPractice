@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 enum TriviaChoiceResult {
     case correct(answer: String)
@@ -34,9 +35,12 @@ enum TriviaChoiceResult {
 struct TriviaController {
     private let trivia: JSONTrivia
     
+    let realm = try! Realm()
+    
     init(trivia: JSONTrivia) {
         self.trivia = trivia
     }
+    
     
     static func refresh(completion: @escaping (TriviaController) -> Void) {
         let req = APIClient()
@@ -49,8 +53,12 @@ struct TriviaController {
         }
     }
     
+    
+    
     func validateChoice(choice: String) -> TriviaChoiceResult {
+        
         guard choice == trivia.answer.removingPercentEncoding! else {
+            
             return .wrong(answer: trivia.answer)
         }
         
